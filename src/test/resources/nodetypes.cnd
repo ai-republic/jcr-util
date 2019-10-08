@@ -1,0 +1,102 @@
+<ai = 'http://ai-republic.com/ai'>
+
+[ai:wfbase] > nt:unstructured
+
+[ai:WorkflowModels] > ai:wfbase
++ ai:WorkflowModel * version
+
+[ai:WorkflowModel] > ai:wfbase, mix:referenceable, mix:versionable
+- description (STRING) 
++ ai:WorkflowSteps
++ ai:WorkflowArtifacts
++ ai:WorkflowStepLinks
++ ai:WorkflowArtifactLinks
++ ai:WorkflowModelFolder *
+
+[ai:WorkflowModelStructureFolder] > ai:wfbase, mix:versionable
++ ai:WorkflowModelStructureFolder *
++ ai:WorkflowModel *
+
+[ai:WorkflowSteps] > ai:wfbase, mix:versionable
++ ai:WorkflowStepCategory *
++ ai:WorkflowStep *
+
+[ai:WorkflowStepCategory] > ai:wfbase, mix:versionable
++ ai:WorkflowStepCategory *
++ ai:WorkflowStep *
+
+[ai:WorkflowStep] > ai:wfbase, mix:referenceable, mix:versionable
+- name (STRING)
+- isStart (BOOLEAN) = 'false' m a 
+- function (BINARY)
+- position (STRING) = '0,0,150,100' m a
+
+[ai:WorkflowArtifacts] > ai:wfbase, mix:versionable
++ ai:WorkflowArtifactCategory *
++ ai:WorkflowArtifact *
+
+[ai:WorkflowArtifactCategory] > ai:wfbase, mix:versionable
++ ai:WorkflowArtifactCategory *
++ ai:WorkflowArtifact *
+
+[ai:WorkflowArtifact] > ai:wfbase, mix:referenceable, mix:versionable
+- name (STRING)
+- content (BINARY)
+- position (STRING) = '0,0,100,75' m a
++ ai:WorkflowAction *
+
+[ai:WorkflowStepLinks] > ai:wfbase, mix:versionable
++ ai:WorkflowStepLink *
+
+[ai:WorkflowStepLink] > ai:wfbase, mix:versionable
+- name (STRING)
+- source (REFERENCE)
+- destination (REFERENCE)
++ ai:WorkflowCondition
+
+[ai:WorkflowCondition] > ai:wfbase, mix:versionable
+- class (STRING)
++ ai:WorkflowCondition *
+
+[ai:WorkflowArtifactLinks] > ai:wfbase, mix:versionable
++ ai:WorkflowArtifactLink *
+
+[ai:WorkflowArtifactLink] > ai:wfbase, mix:versionable
+- name (STRING)
+- source (REFERENCE)
+- destination (REFERENCE)
+
+[ai:Workflows] > ai:wfbase
++ ai:WorkflowStructureFolder
++ ai:WorkflowFolder *
+
+[ai:WorkflowStructureFolder] > ai:wfbase
++ ai:WorkflowStructureFolder *
++ ai:WorkflowFolder
+
+[ai:WorkflowFolder] > ai:wfbase
++ ai:Workflow
++ ai:WorkflowArtifacts
+
+[ai:Workflow] > ai:wfbase, mix:referenceable
+- model (REFERENCE) m
+- currentSteps (STRING) *
+
+[ai:Snapshots] > ai:wfbase
++ ai:SnapshotModelFolder *
++ ai:SnapshotStructureFolder *
+
+[ai:SnapshotStructureFolder] > ai:wfbase
++ ai:SnapshotStructureFolder *
++ ai:SnapshotModelFolder *
+
+[ai:SnapshotModelFolder] > ai:wfbase
++ ai:SnapshotFolder
+
+[ai:SnapshotFolder] > ai:wfbase
++ ai:WorkflowFolder
+
+[ai:WorkflowAction] > ai:wfbase
+- fromDate (DATE)
+- toDate (DATE)
+
