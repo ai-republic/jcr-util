@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackrabbit.version>2.18.3</jackrabbit.version>
+		<jackrabbit.version>2.22.2</jackrabbit.version>
 		<jackrabbit.ocm.version>2.0.0</jackrabbit.ocm.version>
 		<jcr.version>2.0</jcr.version>
 		<slf4j.version>1.8.0-beta4</slf4j.version>
